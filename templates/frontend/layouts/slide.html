@@ -1,0 +1,27 @@
+{% load static %}
+<div id="carousel-testimonials" class="carousel slide carousel-fade" data-ride="carousel">
+    <!-- Indicators Starts -->
+                        <ol class="carousel-indicators">
+        <li data-target="#carousel-testimonials" data-slide-to="0" class="active"></li><li data-target="#carousel-testimonials" data-slide-to="1" class=""></li>                    </ol>
+    <!-- Indicators Ends -->
+    <!-- Carousel Inner Starts -->
+    <div class="carousel-inner">
+                            <div class="item active" style="background-image:url('/static/frontend/img/9.jpg')">
+            <div>
+                <blockquote>
+                    <p>We supply outstanding service and solutions through dedication and excellence.</p>
+                    <footer>This is {{ website_name }}</footer>
+                </blockquote>
+            </div>
+        </div>
+                            <div class="item " style="background-image:url('/static/frontend/img/revolution-slider/slideshow/slideshow2.jpg')">
+            <div>
+                <blockquote>
+                    <p>We're dedicated to giving you the very best of products and services with uniqueness.</p>
+                    <footer>At {{ website_name }}</footer>
+                </blockquote>
+            </div>
+        </div>
+                        </div>
+    <!-- Carousel Inner Ends -->
+</div>
