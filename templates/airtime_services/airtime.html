@@ -1,0 +1,200 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+ <!-- Container Fluid-->
+ <div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Airtime Top up</h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Airtime Top up</li>
+      </ol>
+    </div>
+      
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- Form Basic -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="network-logo">
+                    <img src="{% static 'backend/img/mtn.jpeg' %}" alt="MTN LOGO" id="mtn">
+                    <img src="{% static 'backend/img/airtel.png' %}" alt="AIRTEL LOGO" id="airtel">
+                    <img src="{% static 'backend/img/glo.png' %}" alt="GLO LOGO" id="glo">
+                    <img src="{% static 'backend/img/9mobile.jpg' %}" alt="9MOBILE LOGO" id="9mobile">
+                </div>
+                {% if messages %}
+            {% for message in messages %}
+              {% if message.tags == 'warning' %} 
+                <p class="alert alert-danger">{{ message }}</p>
+                {% elif message.tags == 'success' %}
+                <p class="alert alert-success">{{ message }}</p>
+              {% endif %}
+            {% endfor %}
+            {% endif %}
+        <form method="post" name="frm1" id="airtime_form">
+            {% csrf_token %}
+              <div class="form-group">
+               Network
+              <select name="network" id="network" class="form-control" required>                              
+                <option value="">Select</option>
+                <option value="15">MTN VTU</option>
+                 <option value="20">MTN AWUFU</option>
+                <option value="25">MTN Wallet (Retailer)</option>									  
+                <option value="6">Glo</option>
+                <option value="1">Airtel</option>							  
+                <option value="2">9Mobile</option>
+              </select>
+              <div class="network-error"></div>
+              </div>
+
+              <div class="form-group">
+              Phone Number
+                <input type="number" name="phone"  id="phone" class="form-control" />
+              </div>
+              <div class="form-group">
+                Amount
+                <input name="amt" type="number" id="amt"  class="form-control"  onKeyPress="return isNumber(event)" /><br>
+                  <button id="topup" class="btn btn-primary">Topup</button>						
+              </div>	
+              </form>
+                            
+                  
+          </div>
+        </div>
+       </div>
+       
+      </div>
+<style>
+.network-logo{
+    text-align:center;
+    
+}
+.network-logo img{
+  width:100px;
+  display:none;  
+}
+.network-error{
+    color:red;
+    display:none;
+}
+   
+</style>
+      					
+  </div>
+  <!---Container Fluid-->
+</div>
+<script>
+    function callalert(){
+        var ann="";
+        if(ann!='' && ann!='none'){
+            //alert(ann);
+            document.getElementById('#modalScroll').click();
+        }
+    }
+
+
+        //ev.preventDefault();
+        $("#topup").on("click", function (ev) {
+            // alert("yes");
+            ev.preventDefault();
+            //Validation
+            const network = $('#network').val()
+            const phone = $('#phone').val()
+            const amt = $('#amt').val()
+            const reg = new RegExp("/^[0][0-9]{11}$/");
+           
+            if(network == ""){ 
+                swal("Network Selection Error","Please select one!","error");
+                return false;
+            }
+            if(phone == ""){ 
+                swal("Phone Number Error","Phone number is required!","error");
+                return false;
+            }
+            
+            if (phone.length != 11 && reg.test(phone) == false) {
+                swal("Phone Number Error","Invalid phone number","error");
+                return false;
+            }
+            if(amt == ""){ 
+                swal("Amount Error","Amount is required!","error");
+                return false;
+            }
+    
+            swal({
+                title: "Ready?",
+                text: "Are you sure you want to continue?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((isConfirm) => {
+                if(!isConfirm) return;
+                //$('#topup').html('Processing...')
+                const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+                const serializedAirtime = $("#airtime_form").serialize();
+                $('#topup').attr('disabled',true);
+                $.ajax({
+                    type: "POST",
+                    url: "/airtime/",
+                    headers: { "X-CSRFToken": csrftoken },
+                    data: serializedAirtime,
+                
+                    success: function (resp,status) {
+                      console.log(resp)
+                      if(resp.message == "Insufficient Funds!"){
+                        swal("Error", resp.message,"error");
+                      }else{
+                        swal("Done!", resp.message,"success");
+                      }
+                      $('#topup').removeAttr('disabled');
+                      $('#airtime_form')[0].reset()
+                    
+                    },
+                    error: function (xhr, status, error) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      swal("Error",err.message,"error");
+                      $('#airtime_form')[0].reset()
+                      console.log(err);
+                    }
+
+                  });
+
+            });
+            
+          });
+    
+
+    
+    
+    
+
+    $('#network').on('change', function() {
+        if(this.value == 15 || this.value == 25 || this.value == 20){
+            $('#mtn').show()
+        }else{
+            $('#mtn').hide()
+        }
+
+        if(this.value == 6){
+            $('#glo').show()
+        }else{
+            $('#glo').hide()
+        }
+
+        if(this.value == 1){
+            $('#airtel').show()
+        }else{
+            $('#airtel').hide()
+        }
+        if(this.value == 2){
+            $('#9mobile').show()
+        }else{
+            $('#9mobile').hide()
+        }
+    });
+
+
+    
+    </script>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+ <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">NECO PIN</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">NECO Result PIN </li>
+            </ol>
+          </div>
+			
+			<div class="row">
+            <div class="col-lg-6">
+              <!-- Form Basic -->
+              <div class="card mb-4">
+			  	<div class="card-body">
+            <div class="network-logo">
+              <img src="{% static 'frontend/img/vtu/NECO-PIN.jpg' %}" alt="NECO LOGO" id="neco">
+          </div>
+								  	<form method="post" name="frm1" id="neco_form">
+                                          {% csrf_token %}
+					<div class="form-group">
+					 <b>Price: &#8358;950.00 </b><br>
+					Check result here; <a href="https://result.neco.gov.ng/" target="_blank">result.neco.gov.ng</a>.<br>PIN will be displayed here and also sent to your email.
+					</div>					
+					<div class="form-group">
+						<input name="gneco" type="hidden" id="gneco" value="gwa">
+            <button id="order" class="btn btn-primary">Order</button>						
+					</div>	
+					</form>
+  								
+						
+				</div>
+			  </div>
+			 </div>
+			</div>						
+        </div>
+        <!---Container Fluid-->
+      </div>
+      <style>
+        .network-logo{
+            text-align:center;
+            
+        }
+        .network-logo img{
+          width:100px;
+        }
+    </style>
+      <script>
+        $("#order").on("click", function (ev) {
+            // alert("yes");
+            ev.preventDefault();
+                
+            swal({
+                title: "Ready?",
+                text: "Are you sure you want to continue?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((isConfirm) => {
+                if(!isConfirm) return;
+                $('#order').html('Processing...')
+                $('#order').attr('disabled','disabled')
+                
+                const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+                const serializedWaec = $("#neco_form").serialize();
+                console.log(serializedWaec)
+                $.ajax({
+                    type: "POST",
+                    url: "/neco/",
+                    headers: { "X-CSRFToken": csrftoken },
+                    data: serializedWaec,
+                
+                    success: function (resp,status) {
+                      console.log(resp)
+                      if(resp.message == "Insufficient Funds!"){
+                        swal("Error", resp.message,"error");
+                      }else if(resp.code == 108){
+                        swal("Error", resp.message,"error");
+                      }else{
+                        swal("Done!", resp.message,"success");
+                      }
+                     
+                      $('#order').html('Order')
+                      $('#order').removeAttr('disabled')
+                      //location.reload()
+                    
+                    },
+                    error: function (xhr, status, error) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      swal("Error",err.message,"error");
+                      
+                      $('#order').html('Order')
+                      $('#order').removeAttr('disabled')
+                      //location.reload()
+                      console.log(err);
+                    }
+    
+                  });
+    
+            });
+            
+          });
+    </script>
+      {% endblock %}

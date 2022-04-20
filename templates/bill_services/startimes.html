@@ -1,0 +1,191 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+<!-- Topbar -->
+<!-- Container Fluid-->
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Startimes</h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Startimes</li>
+      </ol>
+    </div>
+      
+      <div class="row">
+      <div class="col-lg-6">
+        <!-- Form Basic -->
+        <div class="card mb-4">
+            <div class="card-body">
+            <form method="post" name="frm1" id="startimes_form">
+                {% csrf_token %}
+              <div class="form-group">
+              Smart Card No
+                <input type="number" name="ssmart"  id="ssmart" class="form-control" />
+                <div id='showdet'></div>
+              </div>
+              
+              <div class="form-group">
+               Amount
+              <select name="samt" id="samt" class="form-control" required>                              
+                <option value="">Select</option>
+                <option value=nova|900.00>Nova - 900 Naira - 1 Month</option><option value=basic|1700.00>Basic (Antenna) - 1,700 Naira - 1 Month</option><option value=smart|2200.00>Smart (Dish) - 2,200 Naira - 1 Month</option><option value=classic|2500.00>Classic (Antenna) - 2,500 Naira - 1 Month</option><option value=super|4200.00>Super (Dish) - 4,200 Naira - 1 Month</option><option value=nova-weekly|300.00>Nova - 300 Naira - 1 Week</option><option value=basic-weekly|600.00>Basic (Antenna) - 600 Naira - 1 Week</option><option value=smart-weekly|700.00>Smart (Dish) - 700 Naira - 1 Week</option><option value=classic-weekly|1200.00>Classic (Antenna) - 1200 Naira - 1 Week </option><option value=super-weekly|1500.00>Super (Dish) - 1,500 Naira - 1 Week</option><option value=nova-daily|90.00>Nova - 90 Naira - 1 Day</option><option value=basic-daily|160.00>Basic (Antenna) - 160 Naira - 1 Day</option><option value=smart-daily|200.00>Smart (Dish) - 200 Naira - 1 Day</option><option value=classic-daily|320.00>Classic (Antenna) - 320 Naira - 1 Day </option><option value=super-daily|400.00>Super (Dish) - 400 Naira - 1 Day</option>		
+              </select>
+              </div>
+              <input type="hidden" name="desc" id="desc">
+              <input type="hidden" name="confirm-customer" value="0" id="customer_valid">
+              <div class="form-group">
+                Phone Number
+                  <input type="number" name="phone"  id="phone" class="form-control" />
+                </div>
+
+              <div class="form-group">
+                  <button id="topup" class="btn btn-primary">Recharge</button>						
+              </div>	
+              </form>
+                            
+                  
+          </div>
+        </div>
+       </div>
+      </div>						
+  </div>
+  <!---Container Fluid-->
+</div>
+
+<script>
+    $('#ssmart').on('keyup',function(){
+        const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+        
+        const data = { 'smartno': this.value, 'bill': 'startimes' }
+        console.log(data)
+        $('#showdet').html('Loading details...')
+        $.ajax({
+            type: "POST",
+            url: "/check-customer/",
+            headers: { "X-CSRFToken": csrftoken },
+            data: data,
+        
+            success: function (resp,status) {
+              console.log(resp)
+              if(status=="success"){
+                const combo="<hr><b>NAME:</b> " + resp.customerName + "<hr><b>BALANCE:</b> " + resp.balance+ '<hr>';
+                  $('#showdet').html(combo)
+                  if(resp.code !== 108){
+                      $('#customer_valid').val("1")
+                  }
+                  
+              }
+             
+            },
+            error: function (xhr, status, error) {
+              var err = eval("(" + xhr.responseText + ")");
+              
+              
+              console.log(err);
+            }
+    
+          });
+    
+    });
+
+
+    $("#topup").on("click", function (ev) {
+        // alert("yes");
+        ev.preventDefault();
+        //Validation
+        const smartno = $('#ssmart').val()
+        const phone = $('#phone').val()
+        const amount = $('#samt').val()
+        const reg = new RegExp("/^[0][0-9]{11}$/");
+        const desc = $( "#samt option:selected" ).text();
+        const confirmcust = $('#customer_valid').val();
+        $('#desc').val(desc)
+        //console.log(desc)
+       
+        if(smartno == ""){ 
+            swal("Smart Card No. is requred!","Please add one!","error");
+            return false;
+        }
+        if(amount == "" || amount == 0){ 
+            swal("Amount is required!","Please select one","error");
+            return false;
+        }
+        
+        if(phone == ""){ 
+            swal("Phone Number Error","Phone number is required!","error");
+            return false;
+        }
+        
+        if (phone.length != 11 && reg.test(phone) == false) {
+            swal("Phone Number Error","Invalid phone number","error");
+            return false;
+        }
+        if(confirmcust == 0){
+            swal("Customer not yet validated!","Invalid customer","error")
+            return false;
+        }
+
+
+        
+
+        swal({
+            title: "Ready?",
+            text: "Are you sure you want to continue?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((isConfirm) => {
+            if(!isConfirm) return;
+            $('#topup').html('Processing...')
+            $('#topup').attr('disabled','disabled')
+            
+            const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+            const serializedStartimes = $("#startimes_form").serialize();
+            console.log(serializedStartimes)
+            $.ajax({
+                type: "POST",
+                url: "/startimes/",
+                headers: { "X-CSRFToken": csrftoken },
+                data: serializedStartimes,
+            
+                success: function (resp,status) {
+                  console.log(resp)
+                  if(resp.message == "Insufficient Funds!"){
+                    swal("Error", resp.message,"error");
+                  }else if(resp.code == 108){
+                    swal("Error", resp.message,"error");
+                  }else{
+                    swal("Done!", resp.message,"success");
+                  }
+                 
+                  $('#startimes_form')[0].reset()
+                  $('#showdet').html("")
+                  $('#topup').html('Recharge')
+                  $('#topup').removeAttr('disabled')
+                  //location.reload()
+                
+                },
+                error: function (xhr, status, error) {
+                  var err = eval("(" + xhr.responseText + ")");
+                  swal("Error",err.message,"error");
+                  $('#startimes_form')[0].reset()
+                  $('#showdet').html("")
+                  $('#topup').html('Recharge')
+                  $('#topup').removeAttr('disabled')
+                  //location.reload()
+                  console.log(err);
+                }
+
+              });
+
+        });
+        
+      });
+    
+
+    
+
+</script>
+{% endblock %}

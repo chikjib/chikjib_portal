@@ -1,0 +1,85 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+<!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Payment Notification</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Payment Notification</li>
+            </ol>
+          </div>
+			
+			<div class="row">
+            <div class="col-lg-6">
+              <!-- Form Basic -->
+              <div class="card mb-4">
+			  	<div class="card-body">
+
+								  	Pay via cash deposit, bank or mobile transfer your deposit to the bank account below;<br>
+					  <b>Account Name:</b> IBK Information Technology<br>
+					  <b>Bank Name:</b> GTB<br>
+					  <b>Account Number:</b> 0109012060
+					  <p>Please note that there is a &#8358;50 stamp duty charge on all cash deposit or transfer starting from &#8358;1,000</p>
+
+					  {% if messages %}
+					  {% for message in messages %}
+						{% if message.tags == 'warning' %} 
+						  <p class="alert alert-danger">{{ message }}</p>
+						  {% elif message.tags == 'success' %}
+						  <p class="alert alert-success">{{ message }}</p>
+						{% endif %}
+					  {% endfor %}
+					  
+					  {% endif %}
+		
+					  {% for field in form %}
+								{% for error in field.errors %}
+									<div class="alert alert-danger">
+										<strong>{{ error|escape }}</strong>
+									</div>
+								{% endfor %}
+					  {% endfor %}
+
+					<form method="post">
+						{% csrf_token %}
+					<div class="form-group">
+                      <label for="exampleFormControlInput1">Your Name</label>
+					  {% render_field form.name class="form-control" id="exampleFormControlInput1" readonly="true" required="true" %}
+                     
+                    </div>
+					{% render_field form.email class="form-control" id="exampleFormControlInput1" readonly="true" required="true" hidden="true" %}
+
+					{% render_field form.user class="form-control" id="exampleFormControlInput1" readonly="true" required="true" hidden="true" %}
+					<div class="form-group">
+                      Deposit Type
+                      <select class="form-control" name="deposit_type" id="ptype" required>
+						<option value="">-Select-</option>
+						<option value="Cash deposit">Cash deposit</option>
+						<option value="Bank-Mobile Transfer">Bank-Mobile transfer</option>
+						</select>	
+                    </div>
+					<div class="form-group">
+                      Amount
+						<input type="number" name="amount" id="famt" class="form-control"  required>
+						
+					</div>
+					<div class="form-group">
+					Description
+						<textarea name="description" id="paydetails" placeholder="Please state sender's account name and bank. If USSD state phone number also." required class="form-control"></textarea><br>
+						<input type="submit" name="sreq" id="sreq"  value="Submit" class="btn btn-primary">	
+                    </div>
+					
+					</form>
+										
+						
+				</div>
+			  </div>
+			 </div>
+			</div>						
+        </div>
+        <!---Container Fluid-->
+      </div>
+      {% endblock %}

@@ -1,0 +1,164 @@
+{% load static %}
+<body id="page-top">
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dashboard' %}">
+          <div class="sidebar-brand-icon">
+            <img src="{% static 'backend/img/logo/logo2.png' %}">
+          </div>
+          <div class="sidebar-brand-text mx-3">Chikjib Portal</div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'dashboard' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+        </li>
+        <hr class="sidebar-divider">
+  <li class="nav-item">
+	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+	  aria-controls="collapseForm">
+	  <i class="fab fa-fw fa-wpforms"></i>
+	  <span>Wallet</span>
+	</a>
+	<div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+	  <div class="bg-white py-2 collapse-inner rounded">
+		<h6 class="collapse-header">Wallet</h6>
+		<a class="collapse-item" href="{% url 'fund_wallet' %}">Fund Wallet</a>
+		<a class="collapse-item" href="{% url 'payment_notification' %}">Payment Notification</a>
+	  </div>
+	</div>
+  </li>
+  <li class="nav-item">
+	<a class="nav-link" href="{% url 'airtime' %}">
+	  <i class="fas fa-fw fa-link"></i>
+	  <span>Airtime</span>
+	</a>
+  </li>
+  <li class="nav-item">
+	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm1" aria-expanded="true"
+	  aria-controls="collapseForm">
+	  <i class="fab fa-fw fa-wpforms"></i>
+	  <span>Data Bundles</span>
+	</a>
+	<div id="collapseForm1" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+	  <div class="bg-white py-2 collapse-inner rounded">
+		<h6 class="collapse-header">Data</h6>
+		<a class="collapse-item" href="{% url 'data' %}">MTN Datashare</a>
+		<a class="collapse-item" href="{% url 'adata' %}">Airtel Datashare</a>
+		<a class="collapse-item" href="{% url 'direct_data' %}">All Networks</a>
+	  </div>
+	</div>
+  </li>
+  <li class="nav-item">
+	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true"
+	  aria-controls="collapseForm">
+	  <i class="fab fa-fw fa-wpforms"></i>
+	  <span>Cable TVs</span>
+	</a>
+	<div id="collapseForm2" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+	  <div class="bg-white py-2 collapse-inner rounded">
+		<h6 class="collapse-header">Cable TVs</h6>
+		<a class="collapse-item" href="{% url 'startimes' %}">Startimes</a>
+		<a class="collapse-item" href="{% url 'gotv' %}">GOtv</a>
+		<a class="collapse-item" href="{% url 'dstv' %}">Dstv</a>
+	  </div>
+	</div>
+  </li>
+	<li class="nav-item">
+	<a class="nav-link" href="{% url 'power_pay' %}">
+	  <i class="fas fa-fw fa-link"></i>
+	  <span>Electricity</span>
+	</a>
+  </li>
+  <li class="nav-item">
+	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm3" aria-expanded="true"
+	  aria-controls="collapseForm">
+	  <i class="fab fa-fw fa-wpforms"></i>
+	  <span>Educational</span>
+	</a>
+	<div id="collapseForm3" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+	  <div class="bg-white py-2 collapse-inner rounded">
+		<h6 class="collapse-header">Educational</h6>
+		<a class="collapse-item" href="{% url 'waec' %}">WAEC Result PIN</a>
+		<a class="collapse-item" href="{% url 'neco' %}">NECO Result Checker</a>
+	  </div>
+	</div>
+  </li>
+ 
+ 
+  <li class="nav-item">
+	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm4" aria-expanded="true"
+	  aria-controls="collapseForm">
+	  <i class="fab fa-fw fa-wpforms"></i>
+	  <span>Services</span>
+	</a>
+	<div id="collapseForm4" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+	  <div class="bg-white py-2 collapse-inner rounded">
+		<h6 class="collapse-header">Services</h6>
+		<a class="collapse-item" href="{% url 'support' %}">Web Development</a>
+	  </div>
+	</div>
+  </li>
+  <li class="nav-item">
+	<a class="nav-link" href="{% url 'transactions' %}">
+	  <i class="fas fa-fw fa-table"></i>
+	  <span>Transactions</span>
+	</a>
+  </li>
+  <hr class="sidebar-divider">
+  <li class="nav-item">
+	<a class="nav-link" href="{% url 'support' %}">
+	  <i class="fas fa-fw fa-columns"></i>
+	  <span>Support</span>
+	</a>
+  </li>
+  <li class="nav-item">
+	<a class="nav-link" href="{% url 'logout' %}">
+	  <i class="fas fa-fw fa-columns"></i>
+	  <span>Logout</span>
+	</a>
+  </li>  
+</ul>
+      <!-- Sidebar -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <!-- TopBar -->
+          <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+            <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+              <i class="fa fa-bars"></i>
+            </button>
+            <ul class="navbar-nav ml-auto">
+                          
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <img class="img-profile rounded-circle" src="{% static 'backend/img/boy.png' %}" style="max-width: 60px">
+                  <span class="ml-2 d-none d-lg-inline text-white small">{% if request.user.is_authenticated %}  {{ request.user }} {% endif %}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="{% url 'profile' %}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                  </a>
+                  
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'password_change' %}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                   Change Password
+                  </a>
+                  
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- Topbar -->
+  
+  

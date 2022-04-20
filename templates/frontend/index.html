@@ -1,0 +1,1907 @@
+{% extends 'frontend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+
+<body class="big-triangle" style="">
+    <div
+      class="loader startloading"
+      style="
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 9999999 !important;
+        background: rgba(255, 255, 255, 0.73);
+        vertical-align: middle;
+        display: none;
+        top: 0;
+        left: 0;
+        font-family: sans-serif;
+      "
+    >
+      <div
+        style="
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          padding: 10px;
+        "
+      >
+        <img
+          src="{% static 'frontend/img/loader.gif' %}"
+          alt="Check our amazing website."
+          style="width: 80px"
+        /><br />
+        <center>
+          <span style="color: #404040; font-size: 16px">Loading...</span>
+        </center>
+      </div>
+    </div>
+    <!-- Preloader Starts -->
+
+    <div id="myCarousel" class="carousel slide" style="height: ; display: ">
+      <!-- Indicators -->
+
+      <!-- Wrapper for Slides -->
+      <div class="carousel-inner" style="height: 100%">
+        <div class="item active">
+          <!-- Set the first background image using inline CSS below. -->
+          <div
+            class="fill"
+            style="
+              background-image: url('/static/frontend/img/9.jpg');
+              opacity: 0.5;
+            "
+          ></div>
+          <div
+            class="carousel-caption adjustonmobile"
+            style="text-align: left; font-family: helvetica; font-weight: bold"
+          >
+            <h2
+              class="animated fadeInLeft"
+              style="color: #ffffff; font-size: 40px"
+            >
+              This is {{ website_name }}
+            </h2>
+
+            <div
+              class="animated fadeInUp"
+              style="
+                color: #ffffff;
+                font-size: 20px;
+                line-height: 30px;
+                padding-top: 10px;
+                padding-bottom: 20px;
+              "
+            >
+              We supply outstanding service and solutions through dedication and
+              excellence. Buy data starting from 1GB @ #250 ONLY. The cheapest anywhere!
+            </div>
+            <p class="animated fadeInUp">
+              <a
+                href="#allservices"
+                calling="yes"
+                class="btn btn-transparent btn-rounded btn-large"
+                >All Services</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="item">
+          <!-- Set the first background image using inline CSS below. -->
+          <div
+            class="fill"
+            style="
+              background-image: url('/static/frontend/img/revolution-slider/slideshow/slideshow2.jpg');
+              opacity: 0.5;
+            "
+          ></div>
+          <div
+            class="carousel-caption adjustonmobile"
+            style="text-align: left; font-family: helvetica; font-weight: bold"
+          >
+            <h2
+              class="animated fadeInLeft"
+              style="color: #ffffff; font-size: 40px"
+            >
+              At {{ website_name }}
+            </h2>
+
+            <div
+              class="animated fadeInUp"
+              style="
+                color: #ffffff;
+                font-size: 20px;
+                line-height: 30px;
+                padding-top: 10px;
+                padding-bottom: 20px;
+              "
+            >
+              We're dedicated to giving you the very best of products and
+              services with uniqueness. Start your own VTU business now, just register and start its free! Become your own boss!
+            </div>
+            <p class="animated fadeInUp">
+              <a
+                href="#allservices"
+                calling="yes"
+                class="btn btn-transparent btn-rounded btn-large"
+                >All Services</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Style Switcher Ends - demo only -->
+    <!-- Page Wrapper Starts -->
+    <div class="wrapper">
+      <!-- Header Starts -->
+      <header class="header header-fixed" style="display: ">
+        <div
+          class="bar-long"
+          style="
+            height: 2px;
+            background-color: black;
+            width: 0px;
+            z-index: 1000;
+            position: absolute;
+            top: 0;
+            left: 0;
+          "
+        ></div>
+
+        <div class="header-inner">
+          <!-- Navbar Starts -->
+          <nav class="navbar">
+            <!-- Logo Starts -->
+            <div class="logo">
+              <a
+                data-toggle="collapse"
+                data-target=".navbar-collapse.show"
+                class="navbar-brand"
+                href="{% url 'home' %}"
+              >
+                <h3 id="logo-light" class="logo-light">{{ website_name }}</h3>
+                <h3 id="logo-dark" style="color: black" class="logo-dark">
+                  {{ website_name }}
+                </h3>
+              </a>
+            </div>
+            <!-- Logo Ends -->
+            <!-- Toggle Icon for Mobile Starts -->
+            <button
+              class="navbar-toggle navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span id="icon-toggler">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+            <!-- Toggle Icon for Mobile Ends -->
+            <div
+              id="navbarSupportedContent"
+              class="collapse navbar-collapse navbar-responsive-collapse"
+            >
+              <!-- Main Menu Starts -->
+              <ul class="nav navbar-nav" id="main-navigation">
+                <li class="">
+                  <a href="#myCarousel" class="scroll-to-target"
+                    ><i class="fa fa-home"></i> Home</a
+                  >
+                </li>
+                <li>
+                  <a href="#about" class="scroll-to-target"
+                    ><i class="fa fa-user"></i> About Us</a
+                  >
+                </li>
+
+                <li style="">
+                  <a href="#whyus" class="scroll-to-target"
+                    ><i class="fa fa-gear"></i> Why Us</a
+                  >
+                </li>
+                <li style="display: ">
+                  <a href="#allservices" class="scroll-to-target"
+                    ><i class="fa fa-image"></i> All Services</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="#showcase"
+                    style="display: none"
+                    class="scroll-to-target"
+                    ><i class="fa fa-eye"></i> Welcome Video</a
+                  >
+                </li>
+
+                <li>
+                  <a href="{% url 'login' %}"
+                    ><i class="fa fa-sign-in"></i> Login/Register</a
+                  >
+                </li>
+                
+              </ul>
+              <!-- Main Menu Ends -->
+            </div>
+          </nav>
+          <!-- Navbar Ends -->
+        </div>
+      </header>
+      <!-- Header Ends -->
+      <!-- Main Slider Section Starts -->
+      <!-- Main Slider Section Ends -->
+
+      <!-- About Section Starts -->
+      <!-- About Section Ends -->
+      <!-- Video Section Starts -->
+      <section class="videopromotion2" id="showcase" style="display: none">
+        <div class="section-overlay">
+          <!-- Container Starts -->
+          <div class="container">
+            <!-- Main Heading Starts -->
+            <div class="text-center top-text">
+              <h1>Welcome Video</h1>
+            </div>
+            <!-- Main Heading Ends -->
+            <div class="video-content">
+              <p class="text-center"></p>
+              <!-- Video Play Starts -->
+              <div class="magnific-popup-gallery">
+                <div class="btn-wrapper text-center">
+                  <a
+                    class="image-wrap mfp-youtube"
+                    href="https://www.youtube.com/watch?v=LrMYVu-W7tA"
+                  ></a>
+                </div>
+              </div>
+              <!-- Video Play Ends -->
+            </div>
+          </div>
+          <!-- Container Ends -->
+        </div>
+      </section>
+      <!-- Video Section Ends -->
+      <!-- Services Section Starts -->
+      <section
+        class="services2"
+        id="whyus"
+        style="margin-top: -46px; display: "
+      >
+        <div class="container" style="padding: 25px 15px 30px !important">
+          <h3>
+            <span
+              style="
+                margin: 1em 0 0.5em 0;
+                font-weight: 600;
+                font-family: 'Titillium Web', sans-serif;
+                position: relative;
+                text-shadow: 0 -2px 2px rgba(0, 0, 0, 0.4);
+                font-size: 16px;
+                line-height: 40px;
+                color: #fff;
+                text-transform: uppercase;
+                background: #00857a;
+                border-radius: 0px 0px 10px 10px;
+                padding: 7px 20px;
+              "
+              >Why Us</span
+            >
+          </h3>
+          <div class="cen row">
+            <div class="col-md-6" style="text-align: center">
+              <h2 style="font-size: 18px; font-weight: 600; text-align: center">
+                <i
+                  class="fa fa-tachometer"
+                  style="
+                    background: #00857a;
+                    color: white;
+                    border-radius: 50%;
+                    padding: 15px;
+                    font-size: 30px;
+                  "
+                ></i
+                ><br />SPEED
+              </h2>
+
+              <div
+                style="
+                  white-space: pre-line;
+                  margin-top: -24px;
+                  font-size: 18px;
+                  line-height: 28px;
+                  font-family: arial;
+                "
+              >
+                Built with industry latest Technology, which ensures that our services are rendered seamlessly. We deliver fast anytime and anyday.
+              </div>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+              <h2 style="font-size: 18px; font-weight: 600; text-align: center">
+                <i
+                  class="fa fa-list"
+                  style="
+                    background: #00857a;
+                    color: white;
+                    border-radius: 50%;
+                    padding: 15px;
+                    font-size: 30px;
+                  "
+                ></i
+                ><br />AGILITY
+              </h2>
+
+              <div
+                style="
+                  white-space: pre-line;
+                  margin-top: -24px;
+                  font-size: 18px;
+                  line-height: 28px;
+                  font-family: arial;
+                "
+              >
+                We employ agile development methodology
+                allowing for increased flexibility.
+              </div>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+              <h2 style="font-size: 18px; font-weight: 600; text-align: center">
+                <i
+                  class="fa fa-anchor"
+                  style="
+                    background: #00857a;
+                    color: white;
+                    border-radius: 50%;
+                    padding: 15px;
+                    font-size: 30px;
+                  "
+                ></i
+                ><br />UNDERSTANDING
+              </h2>
+
+              <div
+                style="
+                  white-space: pre-line;
+                  margin-top: -24px;
+                  font-size: 18px;
+                  line-height: 28px;
+                  font-family: arial;
+                "
+              >
+                Our software developers spend considerable
+                time in offering the finest solution.
+              </div>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+              <h2 style="font-size: 18px; font-weight: 600; text-align: center">
+                <i
+                  class="fa fa-comments-o"
+                  style="
+                    background: #00857a;
+                    color: white;
+                    border-radius: 50%;
+                    padding: 15px;
+                    font-size: 30px;
+                  "
+                ></i
+                ><br />TRUST AND RELIABILITY
+              </h2>
+
+              <div
+                style="
+                  white-space: pre-line;
+                  margin-top: -24px;
+                  font-size: 18px;
+                  line-height: 28px;
+                  font-family: arial;
+                "
+              >
+                With our Whatsapp Team online to answer and handle any problem you encounter while using any of our services; means we are always ready to hear from you.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="portfolio"
+        id="allservices"
+        style="margin-top: -50px; display: "
+      >
+        <!-- Container Starts -->
+        <div class="container" style="padding: 60px 15px 30px !important">
+          <!-- Main Heading Starts -->
+          <div class="text-center top-text">
+            <h3>
+              <span
+                style="
+                  margin: 1em 0 0.5em 0;
+                  font-weight: 600;
+                  font-family: 'Titillium Web', sans-serif;
+                  position: relative;
+                  text-shadow: 0 -2px 2px rgba(0, 0, 0, 0.4);
+                  font-size: 16px;
+                  line-height: 40px;
+                  color: #fff;
+                  text-transform: uppercase;
+                  background: #00857a;
+                  border-radius: 0px 0px 10px 10px;
+                  padding: 7px 20px;
+                "
+                >All Services</span
+              >
+            </h3>
+          </div>
+          <!-- Main Heading Starts -->
+          <!-- Divider Ends -->
+          <!-- Filter Wrapper Starts -->
+
+          <!-- Filter Wrapper Ends -->
+          <div>
+            <div class="filtr-container" style="margin:10px -15px; 0 -15px">
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="MTN Airtime"
+                    >
+                      <img
+                        class="img-responsive"
+                        style=""
+                        src="{% static 'frontend/img/vtu/MTN-Airtime.jpg' %}"
+                        alt="MTN Airtime"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        MTN Airtime
+                      </h3> </a
+                    ><!--
+<p style="">
+
+<a target="" href="{% url 'dashboard' %}" class="btn-sm" style="background:#00857a;color:white;display:">Buy Now</a>
+
+
+</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="AIRTEL Airtime"
+                    >
+                      <img
+                        class="img-responsive"
+                        style=""
+                        src="{% static 'frontend/img/vtu/Airtel-Airtime.jpg' %}"
+                        alt="AIRTEL Airtime"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        AIRTEL Airtime
+                      </h3> </a
+                    ><!--
+<p style="">
+
+<a target="" href="{% url 'dashboard' %}" class="btn-sm" style="background:#00857a;color:white;display:">Buy Now</a>
+
+
+</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="GLO Airtime"
+                    >
+                      <img
+                        class="img-responsive"
+                        style=""
+                        src="{% static 'frontend/img/vtu/GLO-Airtime.jpg' %}"
+                        alt="GLO Airtime"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        GLO Airtime
+                      </h3> </a
+                    ><!--
+<p style="">
+
+<a target="" href="{% url 'dashboard' %}" class="btn-sm" style="background:#00857a;color:white;display:">Buy Now</a>
+
+
+</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="9MOBILE Airtime"
+                    >
+                      <img
+                        class="img-responsive"
+                        style=""
+                        src="{% static 'frontend/img/vtu/9mobile-Airtime.jpg' %}"
+                        alt="9MOBILE Airtime"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        9MOBILE Airtime
+                      </h3> </a
+                    ><!--
+<p style="">
+
+<a target="" href="{% url 'dashboard' %}" class="btn-sm" style="background:#00857a;color:white;display:">Buy Now</a>
+
+
+</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="MTN SME DATA"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/MTN-Airtime.jpg' %}"
+                        alt="MTN SME DATA"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        MTN SME DATA
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="MTN GIFTING DATA"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/MTN-Airtime.jpg' %}"
+                        alt="MTN GIFTING DATA"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        MTN GIFTING DATA
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="SMILE PAYMENT"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Smile-Payment.jpg' %}"
+                        alt="SMILE PAYMENT"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        SMILE PAYMENT
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="AIRTEL DATA"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Airtel-Airtime.jpg' %}"
+                        alt="AIRTEL DATA"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        AIRTEL DATA
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="AIRTEL CG"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Airtel-Airtime.jpg' %}"
+                        alt="AIRTEL CG"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        AIRTEL CG
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="GLO DATA"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/GLO-Airtime.jpg' %}"
+                        alt="GLO DATA"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        GLO DATA
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="9MOBILE DATA"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/9mobile-Airtime.jpg' %}"
+                        alt="9MOBILE DATA"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        9MOBILE DATA
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="DStv Subscription"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Pay-DSTV-Subscription.jpg' %}"
+                        alt="DStv Subscription"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        DStv Subscription
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="Gotv Subscription"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Gotv-Payment.jpg' %}"
+                        alt="Gotv Subscription"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        Gotv Subscription
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="Startimes Subscription"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Startimes-Subscription.jpg' %}"
+                        alt="Startimes Subscription"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        Startimes Subscription
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="WAEC REGISTRATION PIN"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/WAEC-Result-Checker-PIN.jpg' %}"
+                        alt="WAEC REGISTRATION PIN"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        WAEC REGISTRATION PIN
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="WAEC RESULT CHECKER PIN"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/WAEC-Result-Checker-PIN.jpg' %}"
+                        alt="WAEC RESULT CHECKER PIN"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        WAEC RESULT CHECKER PIN
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="NECO RESULT CHECKER PIN"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Neco-PIN.jpg' %}"
+                        alt="NECO RESULT CHECKER PIN"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        NECO RESULT CHECKER PIN
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="JAMB EPIN"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/jamb.png' %}"
+                        alt="JAMB EPIN"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      target=""
+                      href="{% url 'dashboard' %}"
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        JAMB EPIN
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="AEDC - Abuja Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Abuja-Electric.jpg' %}"
+                        alt="AEDC - Abuja Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        AEDC - Abuja Electricity
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="EKEDC - Eko Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Eko-Electric-Payment-PHCN.jpg' %}"
+                        alt="EKEDC - Eko Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        EKEDC - Eko Electricity
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="IBEDC - Ibadan Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/IBEDC-Ibadan-Electricity-Distribution-Company.jpg' %}"
+                        alt="IBEDC - Ibadan Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        IBEDC - Ibadan Electricit...
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="IKEDC - Ikeja Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Ikeja-Electric-Payment-PHCN.jpg' %}"
+                        alt="IKEDC - Ikeja Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        IKEDC - Ikeja Electricity
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="JED - Jos Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Jos-Electric-JED.jpg' %}"
+                        alt="JED - Jos Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        JED - Jos Electricity
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="KAEDCO - Kaduna Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Kaduna-Electric-KAEDCO.jpg' %}"
+                        alt="KAEDCO - Kaduna Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        KAEDCO - Kaduna Electrici...
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="KEDCO - Kano Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Kano-Electric.jpg' %}"
+                        alt="KEDCO - Kano Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        KEDCO - Kano Electricity
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xs-12 col-sm-3 col-md-3 filtr-items"
+                data-category="1"
+              >
+                <div class="magnific-popup-gallery">
+                  <figure class="thumbnail thumbnail__portfolio">
+                    <a
+                      target=""
+                      class="image-w rap"
+                      href="{% url 'dashboard' %}"
+                      title="PHED - Port Harcourt Electricity"
+                    >
+                      <img
+                        class="img-responsive"
+                        style="border-radius: "
+                        src="{% static 'frontend/img/vtu/Port-Harcourt-Electric.jpg' %}"
+                        alt="PHED - Port Harcourt Electricity"
+                    /></a>
+                  </figure>
+                  <div class="caption">
+                    <a
+                      class="title-link"
+                      href="{% url 'dashboard' %}"
+                      target=""
+                    >
+                      <h3
+                        style="
+                          margin-top: -1px;
+                          background: rgba(0, 0, 0, 0.6);
+                          padding: 5px;
+                          color: white;
+                          font-size: 14px;
+                        "
+                      >
+                        PHED - Port Harcourt Elec...
+                      </h3>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Container Ends -->
+      </section>
+
+      <section id="about" class="about" style="margin-top: -22px; display: ">
+        <!-- Container Starts -->
+        <div class="container" style="padding: 2px 15px 30px !important">
+          <!-- Main Heading Starts -->
+          <div class="text-center top-text">
+            <h3>
+              <span
+                style="
+                  margin: 1em 0 0.5em 0;
+                  font-weight: 600;
+                  font-family: 'Titillium Web', sans-serif;
+                  position: relative;
+                  text-shadow: 0 -2px 2px rgba(0, 0, 0, 0.4);
+                  font-size: 16px;
+                  line-height: 40px;
+                  color: #fff;
+                  text-transform: uppercase;
+                  background: #00857a;
+                  border-radius: 0px 0px 10px 10px;
+                  padding: 7px 20px;
+                "
+                >About Us</span
+              >
+            </h3>
+          </div>
+          <!-- About Content Starts -->
+          <div class="row about-content">
+            <div class="col-md-6 col-lg-6 about-right-side">
+              <div
+                class="full-image-container hovered"
+                style="
+                  background-image: url('/static/frontend/img/about.jpg');
+                "
+              >
+                <img
+                  class="img-responsive hidden-xs"
+                  src="{% static 'frontend/img/about.jpg' %}"
+                  alt="Good customer service,Quality staff and equipment,Fast and reliable in every service,Livechat support,& Much More..."
+                />
+                <div class="full-image-overlay">
+                  <h3>Why Choose Us</h3>
+                  <ul class="list-why-choose-us">
+                    <li>Good customer service</li>
+                    <li>Quality staff and equipment</li>
+                    <li>Fast and reliable in every service</li>
+                    <li>Livechat support</li>
+                    <li>& Much More...</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 about-left-side">
+              <h3
+                class="title-about"
+                style="text-transform: uppercase; font-size: 20px"
+              >
+                This is Chikjib Portal
+              </h3>
+
+              <div style="white-space: pre-line; font-size: 17px">
+                <p>
+                  Welcome to Chikjib Portal, your number one source for all data services. We're dedicated to giving you the very best of our
+                  products and services, with a focus on dependability, customer
+                  service and uniqueness.
+                </p>
+              </div>
+              <!-- Tabs Heading Starts -->
+              <ul class="nav nav-tabs">
+                <li class="active">
+                  <a data-toggle="tab" href="#menu1">Our Mission</a>
+                </li>
+                <li><a data-toggle="tab" href="#menu2">Our Advantages</a></li>
+                <li><a data-toggle="tab" href="#menu3">Our Guarantees</a></li>
+              </ul>
+              <!-- Tabs Heading Ends -->
+              <!-- Tabs Content Starts -->
+              <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                  <p
+                    style="
+                      white-space: pre-line;
+                      font-size: 17px;
+                      font-family: arial;
+                    "
+                  >
+                    Our mission is to make a profitable growth through superior
+                    customer service, innovation, quality and commitment. We
+                    supply outstanding service and solutions through dedication
+                    and excellence.
+                  </p>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                  <p
+                    style="
+                      white-space: pre-line;
+                      font-size: 17px;
+                      font-family: arial;
+                    "
+                  >
+                    We strive to provide a high level of customer service. We
+                    combine global expertise with the personalized service a
+                    great business can provide.
+                  </p>
+                </div>
+                <div id="menu3" class="tab-pane fade">
+                  <p
+                    style="
+                      white-space: pre-line;
+                      font-size: 17px;
+                      font-family: arial;
+                    "
+                  >
+                    Our unconditional lifetime guarantee is simple and without
+                    strings or conditions. If our products or services are not
+                    the most comfortable, we will offer you new quality.
+                  </p>
+                </div>
+              </div>
+              <a href="#whyus" class="custom-button" style="border-radius: 5px"
+                >Check Why Us</a
+              >
+            </div>
+          </div>
+          <!-- About Content Ends -->
+        </div>
+        <!-- Container Ends -->
+      </section>
+     
+    
+      <!-- Footer Section Starts -->
+<footer class="footer top-logos" style="display: ">
+  <!-- Footer Top Area Starts -->
+  <div class="container top-footer">
+    <div class="row">
+      <!-- Footer Widget Starts -->
+      <div class="col-xs-6 col-sm-4 col-md-4">
+        <h4>Contact US</h4>
+        <div class="menu">
+          <ul>
+            <li>
+              <span
+                ><i class="fa fa-envelope"></i>
+                <a href="mailto:chikjib2015@gmail.com"
+                  >{{ site_email }}</a
+                ></span
+              >
+            </li>
+            <li>
+              <span
+                ><i class="fa fa-phone"></i>
+                <a href="tel:{{ site_phone }}">{{ site_phone }}</a></span
+              >
+            </li>
+            <li>
+              <span
+                ><i class="fa fa-map-marker"></i> {{ website_link }}</span
+              >
+            </li>
+            <li>
+              <span
+                ><i class="fa fa-clock-o"></i> Mon - Sat (08am -
+                05pm)</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Widget Starts -->
+      <div class="col-xs-6 col-sm-4 col-md-4">
+        <h4>Navigation</h4>
+        <div class="menu">
+          <ul>
+            <li><a href="#myCarousel" class="">Go to Home</a></li>
+            <li><a href="#about" class="">Go to About Us</a></li>
+            <li style=""><a href="#whyus" class="">Go to Why Us</a></li>
+
+            <li style="display: ">
+              <a href="#allservices" class="">Go to All Services</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Footer Widget Ends -->
+
+      <!-- Footer Widget Ends -->
+      <!-- Footer Widget Starts -->
+      <div class="col-xs-6 col-sm-12 col-md-4">
+        <!-- Facts Starts -->
+        <div class="facts-footer">
+          <div>
+            <h5>10+</h5>
+            <span>Available Services</span>
+          </div>
+          <div>
+            <h5>3+</h5>
+            <span>Year of Experience</span>
+          </div>
+          <div>
+            <h5>1</h5>
+            <span>Offices</span>
+          </div>
+          <div>
+            <h5>100+</h5>
+            <span>Customers</span>
+          </div>
+        </div>
+        <!-- Facts Ends -->
+        <hr />
+        <!-- Social Media Links Starts -->
+        <div class="social-icons">
+          <ul class="social">
+            <li>
+              <a
+                class="twitter"
+                target="_blank"
+                href="https://twitter.com/"
+                title="twitter"
+              ></a>
+            </li>
+            <li>
+              <a
+                class="facebook"
+                target="_blank"
+                href="https://facebook.com/"
+                title="facebook"
+              ></a>
+            </li>
+            <li>
+              <a
+                class="google"
+                target="_blank"
+                href="https://wa.me/"
+                title="google"
+              ></a>
+            </li>
+            <li>
+              <a
+                class="linkedin"
+                target="_blank"
+                href="https://www.linkedin.com/in/"
+                title="linkedin"
+              ></a>
+            </li>
+            <li>
+              <a
+                class="instagram"
+                target="_blank"
+                href="https://instagram.com/"
+                title="instagram"
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <!-- Social Media Links Ends -->
+      </div>
+      <!-- Footer Widget Ends -->
+    </div>
+    <!-- Footer Bottom Area Starts -->
+    <div class="bottom-footer">
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- Copyright Text Starts -->
+          <p class="text-center">
+            <a
+              style="font-weight: 600"
+              href="{% url 'home' %}"
+              target="_blank"
+              >Created by {{ website_name }}</a
+            >
+            | {% now "Y" %} © {{ website_name }}
+          </p>
+          <!-- Copyright Text Ends -->
+        </div>
+      </div>
+    </div>
+    <!-- Footer Bottom Area Ends -->
+  </div>
+  <!-- Footer Top Area Ends -->
+</footer>
+<!-- Footer Section Ends -->
+<!-- Back To Top Starts -->
+<div id="back-top-wrapper">
+  <p id="back-top">
+    <a href="#top"><span></span></a>
+  </p>
+</div>
+<!-- Back To Top Ends -->
+</div>
+<!-- Wrapper Ends -->
+
+<!-- Template JS Files -->
+<script src="{% static 'frontend/js/jquery-2.2.4.min.js' %}"></script>
+
+<script src="{% static 'frontend/js/plugins/jquery.easing.1.3.js' %}"></script>
+<script src="{% static 'frontend/js/plugins/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontend/js/plugins/jquery.bxslider.min.js' %}"></script>
+<script src="{% static 'frontend/js/plugins/jquery.filterizr.js' %}"></script>
+<script src="{% static 'frontend/js/plugins/jquery.magnific-popup.min.js' %}"></script>
+
+<!-- Main JS Initialization File -->
+<script src="{% static 'frontend/js/custom.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+  $(".carousel").carousel({
+    interval: 10000,
+  });
+
+  $("a").click(function () {
+    if (
+      $(this).attr("href") != "javascript:void(0)" &&
+      $(this).attr("href") != "javascript:;" &&
+      $(this).attr("href") != "javascript: ;" &&
+      $(this).attr("href") != "#" &&
+      $(this).attr("target") != "_blank" &&
+      $(this).attr("calling") != "yes" &&
+      !$(this).attr("href").includes("#") &&
+      !$(this).attr("href").includes("mailto") &&
+      !$(this).attr("href").includes("tel") &&
+      !$(this).hasClass("image-wrap")
+    ) {
+      // $(".startloading").show();
+    }
+  });
+  $(".scroll-to-target").click(function () {
+    $(".navbar-toggler").trigger("click");
+    $("#icon-toggler").removeClass("open");
+  });
+});
+</script>
+
+<script>
+setTimeout(function () {
+  console.clear();
+  
+}, 3000);
+
+$(".btn-transparent").click(function () {
+  var vl = $(this).attr("href");
+  if (vl.includes("#")) {
+    $("html, body").animate(
+      {
+        scrollTop: $(vl).offset().top,
+      },
+      1000
+    );
+  }
+});
+$(window).scroll(function () {
+  var scrollPercent =
+    (100 * $(window).scrollTop()) /
+    ($(document).height() - $(window).height());
+  $(".bar-long").css("width", scrollPercent + "%");
+});
+</script>
+
+
+</body>
+</html>
+{% endblock %}

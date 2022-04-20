@@ -1,0 +1,192 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+ <!-- Container Fluid-->
+ <div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">DSTV</h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">DStv</li>
+      </ol>
+    </div>
+      
+      <div class="row">
+      <div class="col-lg-6">
+        <!-- Form Basic -->
+        <div class="card mb-4">
+            <div class="card-body">
+            <form method="post" name="frm1" id="dstv_form">
+                {% csrf_token %}
+              <div class="form-group">
+              Smart Card No/IUC
+                <input type="number" name="ssmart"  id="ssmart" class="form-control"/>
+                <div id='showdet'></div>
+              </div>
+              
+              <div class="form-group">
+               Amount
+              <select name="samt" id="samt" class="form-control" required>                              
+                <option value="">Select</option>
+                <option value=7900|COMPE36|1>DStv Compact &#8358;7900</option><option value=12400|COMPLE36|1>DStv Compact Plus &#8358;12400</option><option value=18400|PRWE36|1>DStv Premium &#8358;18400</option><option value=20500|PRWASIE36|1>DStv Premium Asia &#8358;20500</option><option value=6200|ASIAE36|1>Asian Bouqet &#8358;6200</option><option value=2565|NNJ1E36|1>DStv Yanga Bouquet E36 &#8358;2565</option><option value=4615|NNJ2E36|1>DStv Confam Bouquet E36 &#8358;4615</option><option value=1850|NLTESE36|1>Padi &#8358;1850</option><option value=25550|PRWFRNSE36|1>DStv Premium French &#8358;25550</option>		
+              </select>
+              </div>
+              <div class="form-group">
+                  Phone
+                   <input type="number" value="" class="form-control" id="phone" name="phone"  /> 
+              </div>
+              <input type="hidden" name="desc" id="desc">
+              <input type="hidden" name="confirm-customer" value="0" id="customer_valid">
+
+
+              <div class="form-group">
+                  <input name="goname" id="goname" type="hidden" value=""> <input name="goinvoice" id="goinvoice" type="hidden" value="">
+                      <input name="gocustno" id="gocustno" type="hidden" value="">
+                  <button name="tbut" id="topup" class="btn btn-primary">Recharge</button>					
+              </div>	
+              </form>
+                            
+                  
+          </div>
+        </div>
+       </div>
+      </div>						
+  </div>
+
+  <script>
+    $('#ssmart').on('keyup',function(){
+        const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+        
+        const data = { 'smartno': this.value, 'bill': 'dstv' }
+        console.log(data)
+        $('#showdet').html('Loading details...')
+        $.ajax({
+            type: "POST",
+            url: "/check-customer/",
+            headers: { "X-CSRFToken": csrftoken },
+            data: data,
+        
+            success: function (resp,status) {
+              console.log(resp)
+              if(status=="success"){
+                const combo="<hr><b>NAME:</b> " + resp.customerName + "<hr><b>STATUS:</b> " + resp.status+ '<hr>' + "<b>DUE DATE:</b> " + resp.dueDate+ '<hr>';
+                  $('#showdet').html(combo)
+                $('#goname').val(resp.customerName)
+                $('#goinvoice').val(resp.invoice)
+                $('#gocustno').val(resp.customerNumber)
+                if(resp.code != 108){
+                    $('#customer_valid').val("1")
+                }
+              }
+             
+            },
+            error: function (xhr, status, error) {
+              var err = eval("(" + xhr.responseText + ")");
+              
+              
+              console.log(err);
+            }
+    
+          });
+    
+    });
+
+
+    $("#topup").on("click", function (ev) {
+        // alert("yes");
+        ev.preventDefault();
+        //Validation
+        const smartno = $('#ssmart').val()
+        const phone = $('#phone').val()
+        const amount = $('#samt').val()
+        const reg = new RegExp("/^[0][0-9]{11}$/");
+        const desc = $( "#samt option:selected" ).text();
+        const confirmcust = $('#customer_valid').val();
+        $('#desc').val(desc)
+        //console.log(desc)
+       
+        if(smartno == ""){ 
+            swal("Smart Card No. is requred!","Please add one!","error");
+            return false;
+        }
+        if(amount == "" || amount == 0){ 
+            swal("Amount is required!","Please select one","error");
+            return false;
+        }
+        
+        if(phone == ""){ 
+            swal("Phone Number Error","Phone number is required!","error");
+            return false;
+        }
+        
+        if (phone.length != 11 && reg.test(phone) == false) {
+            swal("Phone Number Error","Invalid phone number","error");
+            return false;
+        }
+
+        if(confirmcust == 0){
+            swal("Customer not yet validated!","Invalid customer","error")
+            return false;
+        }
+        
+
+        swal({
+            title: "Ready?",
+            text: "Are you sure you want to continue?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((isConfirm) => {
+            if(!isConfirm) return;
+            $('#topup').html('Processing...')
+            $('#topup').attr('disabled','disabled')
+            
+            const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+            const serializedDsTv = $("#dstv_form").serialize();
+            console.log(serializedDsTv)
+            $.ajax({
+                type: "POST",
+                url: "/dstv/",
+                headers: { "X-CSRFToken": csrftoken },
+                data: serializedDsTv,
+            
+                success: function (resp,status) {
+                  console.log(resp)
+                  if(resp.message == "Insufficient Funds!"){
+                    swal("Error", resp.message,"error");
+                  }else if(resp.code == 108){
+                    swal("Error", resp.message,"error");
+                  }else{
+                    swal("Done!", resp.message,"success");
+                  }
+                 
+                  $('#dstv_form')[0].reset()
+                  $('#showdet').html("")
+                  $('#topup').html('Recharge')
+                  $('#topup').removeAttr('disabled')
+                  //location.reload()
+                
+                },
+                error: function (xhr, status, error) {
+                  var err = eval("(" + xhr.responseText + ")");
+                  swal("Error",err.message,"error");
+                  $('#dstv_form')[0].reset()
+                  $('#showdet').html("")
+                  $('#topup').html('Recharge')
+                  $('#topup').removeAttr('disabled')
+                  //location.reload()
+                  console.log(err);
+                }
+
+              });
+
+        });
+        
+      });
+    
+
+    
+
+</script>
+  {% endblock %}

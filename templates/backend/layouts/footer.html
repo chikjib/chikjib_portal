@@ -1,0 +1,42 @@
+ {% load static %}
+ <!-- Footer -->
+ <footer class="sticky-footer bg-white">
+  <script src="{% static 'backend/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'backend/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'backend/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'backend/js/ruang-admin.min.js' %}"></script>
+  <script src="{% static 'backend/vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'backend/js/demo/chart-area-demo.js' %}"></script> 
+  <script src="{% static 'backend/js/sweetalert.min.js' %}"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <div class="container my-auto py-2">
+      <div class="copyright text-center my-auto">
+        <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script>
+          <b><a href="{{ website_link }}" target="_blank">{{ website_name }}</a></b>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer -->
+</div>
+</div>
+
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+<i class="fas fa-angle-up"></i>
+</a>
+<script>
+  $(document).ready(function() {
+      $('#myTransactions').DataTable({
+         "order": [[ 0, "desc" ]]
+      });
+     
+  } );
+</script>
+
+
+
+
+</body>
+
+</html>

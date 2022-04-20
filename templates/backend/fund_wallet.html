@@ -1,0 +1,47 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+    <!-- Container Fluid-->
+    <div class="container-fluid" id="container-wrapper">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Fund Wallet</h1>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Fund Wallet</li>
+          </ol>
+        </div>
+          
+          <div class="row">
+          <div class="col-lg-6">
+            <!-- Form Basic -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% if request.user.is_authenticated and request.user.profile.funding_account_no is None and request.user.profile.funding_bank is None %}
+                    <h2>Submit Bvn</h2>
+                    <p> Due to CBN policy, to get a dedicated account for easy transfer, you will need to update your bvn. Note: Your bvn is not and will never be stored on our server. Thank you! </p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                            <input type="number" name="bvn" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" value="Submit"/>
+                            </div>
+                             
+                        </form>
+                    {% elif request.user.is_authenticated and request.user.profile.funding_account_no is not None and request.user.profile.funding_bank is not None %}
+                    <b>DIRECT INSTANT WALLET FUNDING</b><br>You can now fund your wallet instantly by simply doing a bank transfer to this Auto Wallet Account <b>(Minimum of N100, Maximum N500,000)</b>;<p><b>Acc No:</b> {{ request.user.profile.funding_account_no }}<br><b>Bank:</b> {{ request.user.profile.funding_bank }}</p>Your wallet balance will be updated immediately.<br>This account number is DEDICATED to you. You can save this account number as a beneficiary on your banking apps to make transferring even easier
+                    {% endif %}
+                    
+                
+                </div>
+            </div>
+           </div>
+          </div>						
+            
+            
+      </div>
+      <!---Container Fluid-->
+    </div>
+      {% endblock %}

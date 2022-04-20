@@ -1,0 +1,250 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+<!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Electricity</h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Electricity</li>
+              </ol>
+            </div>
+              
+              <div class="row">
+              <div class="col-lg-6">
+                <!-- Form Basic -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        Pay your electric bills instantly and print receipt after successful payment.<br>
+                     <div style='padding: 3px; background-color: yellow; color: red'><b>IMPORTANT: If your wallet was debited and the transaction failed, kindly note that it would be reversed in 24 working hours. Please contact us if not reversed after 24 working hours.</b></div>
+                     <br>
+                    <form method="post" name="frm1" id="electricity_form">
+                        {% csrf_token %}
+                      <div class="form-group">
+                      <input type="hidden" name="customer_valid" value="0"  id="customer_valid" />
+                      Service:<br>
+                      <select name="service" id="service" class="form-control" required>
+                          <option value="">Select</option>
+                          
+                        </select>
+
+                        <br>Meter No:<br>
+                        <input name="meterno" type="number" id="meterno" class="form-control" required />
+                        <div id='showdet'></div>
+
+                        <br>Meter Type:<br>
+                        <select name="mtype" id="mtype" class="form-control" required>
+                            <option value=1>Prepaid</option>
+                            <option value=0>Postpaid</option>
+                        </select><br>
+                        Amount:<br>
+                        <input name="amount" type="number" id="amount" class="form-control" required />
+                        <br/>
+                        <button class="btn btn-secondary" id="topup">Recharge</button>					
+                    </div>
+                      </form>
+                      
+          
+                  </div>
+                </div>
+               </div>
+              </div>						
+          </div>
+          <!---Container Fluid-->
+        </div>
+
+        <script>
+            //Power list
+            const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+            $.ajax({
+                type: "POST",
+                url: "/power-list/",
+                headers: { "X-CSRFToken": csrftoken },
+                data: { 'service': this.value },
+            
+                success: function (resp,status) {
+                  console.log(resp)
+                  var products=resp.result;
+                  var ncount=products.length;
+                  //console.log(ncount)
+    
+                  document.getElementById('service').options.length = 0;
+                    var x = document.getElementById("service");
+                    var option = document.createElement("option");
+                    option.value = 0;
+                    option.innerHTML = "Select";
+                    x.add(option);
+    
+                    var icont;
+                    var icont1;
+                    var dvalue;
+                    var dtext;
+                    var disprice;
+    
+                  for (var i=0; i<ncount; i++){
+                    icont1=products[i];
+                    //console.log(icont1)
+                    //icont1=icont.split("*");
+                    dproduct_id=icont1['product_id'];
+                    //console.log(dvalue)
+                    //disprice=dvalue-(dvalue*mdis);
+                    //disprice = parseInt(dvalue).toFixed(2);
+                    //disprice_airtel = dvalue;
+                    
+                    dtext=icont1['name'];
+                                  
+                    var option = document.createElement("option");
+                    option.value = dproduct_id;
+                    option.innerHTML = dtext;
+                    x.appendChild(option);
+    
+                }	
+    
+                
+                },
+                error: function (xhr, status, error) {
+                  var err = eval("(" + xhr.responseText + ")");
+                  
+                  
+                  console.log(err);
+                }
+    
+              });
+
+        
+
+        $('#meterno').on('keyup', function() {
+            $('#showdet').html("Loading details...")
+
+            const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+            const service = $('#service').val()
+            const meterno = $('#meterno').val()
+
+            if(service == ""){ 
+                swal("Service Required!","Please select one!","error");
+                return false;
+            }
+
+            if(meterno == ""){ 
+                swal("Meter number Required!","Input a meter number!","error");
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/power-validate/",
+                headers: { "X-CSRFToken": csrftoken },
+                data: { 'service': service, 'meterno' : meterno },
+            
+                success: function (resp,status) {
+                  console.log(resp)
+                  const combo="<hr><b>NAME:</b> " + resp.message + '<hr>';
+                  $('#showdet').html(combo)
+                  if(resp.code != 101){
+                    $('#customer_valid').val("1")
+                  }
+                  
+                
+                },
+                error: function (xhr, status, error) {
+                  var err = eval("(" + xhr.responseText + ")");
+                  
+                  
+                  console.log(err);
+                }
+    
+              });
+
+        });
+    
+
+        $("#topup").on("click", function (ev) {
+            // alert("yes");
+            ev.preventDefault();
+            //Validation
+            const service = $('#service').val()
+            const meterno = $('#meterno').val()
+            const amount = $('#amount').val()
+            const mtype = $('#mtype').val()
+            const confirmcust = $('#customer_valid').val();
+            //console.log(desc)
+           
+            if(service == ""){ 
+                swal("Service is requred!","Please select one!","error");
+                return false;
+            }
+            if(meterno == ""){ 
+                swal("Meter Number is requred!","Please add one!","error");
+                return false;
+            }
+            
+            if(amount == "" || amount == 0){ 
+                swal("Amount is required!","Please select one","error");
+                return false;
+            }
+            
+            if(confirmcust == 0){
+                swal("Customer not yet validated!","Invalid customer","error")
+                return false;
+            }
+    
+    
+            
+    
+            swal({
+                title: "Ready?",
+                text: "Are you sure you want to continue?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((isConfirm) => {
+                if(!isConfirm) return;
+                $('#topup').html('Processing...')
+                $('#topup').attr('disabled','disabled')
+                
+                const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+                const serializedPower = $("#electricity_form").serialize();
+                console.log(serializedPower)
+                $.ajax({
+                    type: "POST",
+                    url: "/power-pay/",
+                    headers: { "X-CSRFToken": csrftoken },
+                    data: serializedPower,
+                
+                    success: function (resp,status) {
+                      console.log(resp)
+                      if(resp.message == "Insufficient Funds!"){
+                        swal("Error", resp.message,"error");
+                      }else if(resp.message == "Validation failed"){
+                        swal("Error", resp.message,"error");
+                      }else{
+                        swal("Done!", resp.message,"success");
+                      }
+                     
+                      $('#electricity_form')[0].reset()
+                      $('#showdet').html("")
+                      $('#topup').html('Recharge')
+                      $('#topup').removeAttr('disabled')
+                      //location.reload()
+                    
+                    },
+                    error: function (xhr, status, error) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      swal("Error",err.message,"error");
+                      $('#electricity_form')[0].reset()
+                      $('#showdet').html("")
+                      $('#topup').html('Recharge')
+                      $('#topup').removeAttr('disabled')
+                      //location.reload()
+                      console.log(err);
+                    }
+    
+                  });
+    
+            });
+            
+          });
+        </script>
+        {% endblock %}

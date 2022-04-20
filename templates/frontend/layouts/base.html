@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ website_name }}</title>
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://chikjibportal.com/static/frontend/img/no-logo.png" />
+
+    <meta
+      name="description"
+      content="Welcome to Chikjib Portal, your number one source for all things. We're dedicated to giving you the very best of products and services, with a focus on dependability, customer service and uniqueness."
+    />
+
+    <link rel="canonical" href="https://chikjibportal.com" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+
+    <meta property="og:title" content="Chikjib Portal" />
+    <meta
+      property="og:description"
+      content="Welcome to Chikjib Portal, your number one source for all things. We're dedicated to giving you the very best of products and services, with a focus on dependability, customer service and uniqueness."
+    />
+    <meta property="og:url" content="https://chikjibportal.com" />
+    <meta property="og:site_name" content="Chikjib Portal" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:description"
+      content="Welcome to Chikjib Portal, your number one source for all things. We're dedicated to giving you the very best of products and services, with a focus on dependability, customer service and uniqueness."
+    />
+    <meta name="twitter:title" content="Chikjib Portal" />
+
+    <meta name="title" content="Chikjib Portal" />
+    <meta name="keywords" content="Chikjib Portal" />
+    <meta
+      property="og:image"
+      content="https://chikjibportal.com/static/frontend/img/revolution-slider/slideshow/slideshow2.jpg"
+    />
+    <meta
+      property="og:image:url"
+      content="https://chikjibportal.com/static/frontend/img/revolution-slider/slideshow/slideshow2.jpg"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://chikjibportal.com/static/frontend/img/revolution-slider/slideshow/slideshow2.jpg"
+    />
+    <meta property="twitter:url" content="https://chikjibportal.com" />
+    <meta
+      property="twitter:image"
+      content="https://chikjibportal.com/static/frontend/img/revolution-slider/slideshow/slideshow2.jpg"
+    />
+    <meta property="twitter:site" content="@chikjibportal" />
+
+    <!-- Template CSS Files -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'frontend/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'frontend/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'frontend/css/magnific-popup.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'frontend/css/style.css' %}"
+    />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/styleinner.css' %}" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="#00857a" />
+
+
+    <!-- Template JS Files -->
+    <script src="{% static 'frontend/js/modernizr.js' %}"></script>
+
+  </head>
+
+{% block content %} {% endblock %}
+{% include 'frontend/layouts/footer.html' %}

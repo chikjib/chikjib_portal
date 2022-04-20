@@ -1,0 +1,77 @@
+{% extends 'backend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+ <!-- Container Fluid-->
+ <div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Transactions</h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Transactions</li>
+      </ol>
+    </div>
+      <div class="row">
+      <div class="col-lg-12 mb-4">
+        <!-- Simple Tables -->
+        <div class="card">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Transactions</h6>
+          </div>
+          
+          <style>
+            #myTransactions_length label{
+                margin-left: 30px;
+            }
+            #myTransactions_filter label{
+                margin-right: 30px;
+            }
+            #myTransactions_info{
+                margin-left:30px
+            }
+          </style>
+          <div class="table-responsive">
+          
+            <table class="table table-striped" id="myTransactions">
+              <thead>
+                <tr>
+                  <th>DATE</th>
+                  <th>TRANSACTION REFERENCE</th>
+                  <th>SERVICE</th>
+                  <th>DESCRIPTION</th>
+                  <th>DESTINATION</th>
+                  <th>AMOUNT</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                  {% for transaction in transactions %}
+                   <tr> 
+                    <td>{{ transaction.created_at|date:"Y-m-d h:m:i" }}</td>
+                      <td>{{ transaction.transaction_ref }}</td> 
+                      <td>{{ transaction.service }}</td> 
+                      <td>{{ transaction.description }}</td> 
+                      <td>{{ transaction.destination }}</td> 
+                      <td>&#8358;{{ transaction.amount }}</td> 
+                      <td><span class='badge badge-success'>Completed</span></td> 
+                </tr>
+                  {% endfor %}
+             
+                    
+                
+              </tbody>
+            </table>
+          
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--Row-->
+      
+  <!---Container Fluid-->
+</div>
+
+
+
+{% endblock %}
