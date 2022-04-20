@@ -1,0 +1,69 @@
+{% extends 'frontend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+
+{% include 'frontend/layouts/single.html' %}
+    <!-- Preloader Starts -->
+       <div class="wrapper">
+        <div class="container-fluid user-auth">
+            <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+                <!-- Logo Starts -->
+                <a class="logo" href="{% url 'home' %}">  <h3 style="color:white">{{ website_name }}</h3>
+                </a>
+                
+                <!-- Logo Ends -->
+                <!-- Slider Starts -->
+                {% include 'frontend/layouts/slide.html' %}
+                <!-- Slider Ends -->
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            
+                
+                <!-- Logo Ends -->
+                <div class="form-container">
+                    <div>
+                        <!-- Main Heading Starts -->
+                    <div class="text-center top-text" id="login">
+                        <h1 style="font-size:30px"><span>Customers</span> Login</h1>
+                        <p style="text-transform:none;font-size:16px">Great to have you back!</p>
+                    </div>
+                    <!-- Main Heading Ends -->
+                   
+                        <!-- Form Starts -->
+                        <form class="custom-form" method="post">
+                            {% csrf_token %}
+
+                            {% if form.errors %}
+            <p class="alert alert-danger">Your username and password didn't match. Please try again.
+            </p>
+            {% endif %}
+            {% for field in form %}
+            <div class="form-group" style="margin-bottom:10px">
+                {{ field.label_tag }}
+                 {{ field|add_class:"form-control" }}
+            </div>
+            {% endfor %}
+                          
+                            <!-- Input Field Ends -->
+                            <!-- Submit Form Button Starts -->
+                            <div class="form-group" style="margin-bottom:10px">
+                                <button class="custom-button login" name="logindata" type="submit">Login</button>
+                                <p class="text-center">Don't have an account ? <a href="{% url 'register' %}">Register now</a><br><a style="text-transform:none" href="{% url 'password_reset' %}">Forgot your password?</a></p>
+                            </div>
+                            <!-- Submit Form Button Ends -->
+                        </form>
+                        <!-- Form Ends -->
+                    </div>
+                </div>
+
+                <p class="text-center copyright-text"><a style="font-weight:600" href="{{ site_link }}" target="_blank">Created by {{ created_by }}</a> | {% now "Y" %} © <a href="{{ site_link }}">{{ site_link }}</a></p>
+                   
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+{% endblock %}

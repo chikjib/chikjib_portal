@@ -1,0 +1,89 @@
+{% extends 'frontend/layouts/base.html' %} 
+{% load static %} 
+{% block content %}
+{% load widget_tweaks %}
+{% include 'frontend/layouts/single.html' %}
+
+  <!-- Preloader Starts -->
+     <div class="wrapper">
+      <div class="container-fluid user-auth">
+          
+          <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+              <!-- Logo Starts -->
+              <a class="logo" href="{% url 'home' %}">  <h3 style="color:white">{{ website_name }}</h3>
+              </a>
+              
+              <!-- Logo Ends -->
+              <!-- Slider Starts -->
+              {% include 'frontend/layouts/slide.html' %}
+
+              <!-- Slider Ends -->
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+              
+              <a class="visible-xs" href="{% url 'home' %}">
+                  <h4 id="logo-mobile-light" align="center" class="img-responsive mobile-logo white-l">{{ site_name }}</h4>
+                  <h4 id="logo-mobile-dark" align="center" class="img-responsive mobile-logo dark-l">{{ site_name }}</h4>
+                  
+              </a>
+              
+                  <div class="form-container">
+                  <div>
+                                      <div class="text-center top-text" id="register">
+                      <h1 style="font-size:20px"><span>Get</span> Started</h1>
+                      <!--<p style="text-transform:none;font-size:16px">Open account absolutely free</p>-->
+                  
+                  
+                      </div>
+                  <!-- Main Heading Ends -->
+                      <!-- Form Starts -->
+                      
+                      <form class="custom-form" method="post" style="margin-top:-20px">
+                          {% csrf_token %}
+
+                          {% if messages %}
+                      {% for message in messages %}
+                        {% if message.tags == 'warning' %} 
+                          <p class="alert-danger">{{ message }}</p>
+                          {% elif message.tags == 'success' %}
+                          <p class="alert-success">{{ message }}</p>
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% endif %}
+        
+                      {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                      {% endfor %}
+
+                                                      <!-- Input Field Starts -->
+                    {% for field in form %}
+                          <div class="form-group" style="margin-bottom:5px">
+                            {{ field.label_tag }}
+                            {{ field|add_class:"form-control" }}
+
+                          </div>
+                    {% endfor %}
+                         
+                          <!-- Submit Form Button Starts -->
+                          <div class="form-group" style="margin-bottom:5px">
+                              <button class="custom-button" name="submitdata" type="submit">Create Account</button>
+                              <p class="text-center">Already have an account ? <a href="{% url 'login' %}">Login</a>
+                          </div>
+                          <!-- Submit Form Button Ends -->
+                      </form>
+                      <!-- Form Ends -->
+                  </div>
+              </div>
+              <p class="text-center copyright-text"><a style="font-weight:600" href="{{ site_link }}" target="_blank">Created by {{ created_by }}</a> | {% now "Y" %} © <a href="{{ site_link }}">{{ site_link }}</a></p>
+              
+              <!-- Copyright Text Ends -->
+          </div>
+      </div>
+  </div>
+</body>
+{% endblock %}
